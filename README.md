@@ -5,7 +5,8 @@
 ## __Team Members__
 Moustafa Abdou
 The City College of New York  
-*(fill in info)*
+drsh2k19@gmail.com  
+https://github.com/drsh2k  
 
 Olga Kent  
 CUNY Hunter College  
@@ -14,7 +15,8 @@ https://github.com/olgakent
 
 Hugo Meza
 The City College of New York  
-*(fill in info)*
+hgmeza114@gmail.com  
+https://github.com/hgmeza  
 
 Neal Rea  
 The City College of New York  
