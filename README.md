@@ -1,23 +1,25 @@
 # Climate Change: Do Humans Matter?
-*(team name)*
-*Use NASA climate data to engage public in climate change discussions.*
+*Presented by: Degrees Rising*
+*Project Goal: Use NASA climate data to engage public in climate change discussions.*
 
 ## __Team Members__
 Moustafa Abdou
+The City College of New York  
 *(fill in info)*
 
-Olga Kent
-CUNY Hunter College
-olgakent.ok@gmail.com
-https://github.com/olgakent
+Olga Kent  
+CUNY Hunter College  
+olgakent.ok@gmail.com  
+https://github.com/olgakent  
 
 Hugo Meza
+The City College of New York  
 *(fill in info)*
 
-Neal Rea
-The City College of New York
-nealrea818@gmail.com
-https://github.com/nealrea
+Neal Rea  
+The City College of New York  
+nealrea818@gmail.com  
+https://github.com/nealrea  
 
 ## Why is this important?
 Climate change is real and it is happening right now.  While the vast majority of scientists and politicians agree that the Earth cycles through natural changes in climate throughout time, the debate on the significance of anthropogenic (human) effects on climate change is at the center of  a growing rift between the political and scientific communities.  Scientists have compelling evidence that human interactions with the planet are indeed contributing to and compounding the natural climate cycles of the Earth.  It is crucial that we work to create new distribution methods of this information so that the public can be informed and politicians can enact legislation to contain and control anthropogenic contributions to climate change.
