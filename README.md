@@ -1,24 +1,24 @@
 # Climate Change: Do Humans Matter?
-*Presented by: Degrees Rising*
+*Presented by: Degrees Rising*  
 *Project Goal: Use NASA climate data to engage public in climate change discussions.*
 
 ## __Team Members__
-Moustafa Abdou
+**Moustafa Abdou**  
 The City College of New York  
 drsh2k19@gmail.com  
 https://github.com/drsh2k  
 
-Olga Kent  
+**Olga Kent**  
 CUNY Hunter College  
 olgakent.ok@gmail.com  
 https://github.com/olgakent  
 
-Hugo Meza
+**Hugo Meza**  
 The City College of New York  
 hgmeza114@gmail.com  
 https://github.com/hgmeza  
 
-Neal Rea  
+**Neal Rea**  
 The City College of New York  
 nealrea818@gmail.com  
 https://github.com/nealrea  
