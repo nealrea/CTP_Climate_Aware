@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>	Climate Aware</title>
+  <meta name="description" content="Climate App" >
+
+  <!-- Bootstrap  -->
+  <link href="../../public/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../public/assets/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../public/assets/css/style.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+  <div id="preloader">
+		<div id="loader">
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="dot"></div>
+			 <div class="lading"></div>
+		</div>
+	</div><!-- /#preloader -->
+	<!-- Preloader End-->
+
+	<!-- Main Menu -->
+	<div id="main-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+		<div class="navbar-header">
+			<!-- responsive navigation -->
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<i class="fa fa-bars"></i>
+			</button> <!-- /.navbar-toggle -->
+
+		</div> <!-- /.navbar-header -->
+
+		<nav class="collapse navbar-collapse">
+			<!-- Main navigation -->
+			<ul id="headernavigation" class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/users">Users</a></li>
+        <li><a href="/posts">Posts</a></li>
+        {{#if cur_user}}
+          <li id="logout"><a href="#">Logout</a></li>
+        {{ else }}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/sign-up">Sign Up</a></li>
+        {{/if}}
+			</ul> <!-- /.nav .navbar-nav -->
+		</nav> <!-- /.navbar-collapse  -->
+	</div><!-- /#main-menu -->
+	<!-- Main Menu End -->
+
+	<!-- Page Top Section -->
+	<section id="page-top" class="section-style" data-background-image="">
+		<div class="pattern height-resize">
+			<div class="container">
+				<h1 class="site-title">
+					Climate-Aware
+				</h1><!-- /.site-title -->
+				<h3 class="section-name">
+					<span>
+						Landing Page
+					</span>
+				</h3><!-- /.section-name -->
+				<h2 class="section-title">
+					Coming Soon
+				</h2>
+        <div class="next-section">
+					<a class="go-to-contact"><span></span></a>
+				</div><!-- /.next-section -->
+
+			</div><!-- /.container -->
+		</div><!-- /.pattern -->
+
+	</section><!-- /#subscribe -->
+	<!-- Subscribe Section End -->
+
+  {{{ body }}}
+
+
+
+  {{#if cur_user}}
+  <script>
+    ;(function() {
+      $('#logout').click(function() {
+        $.post("/logout", function() {
+          window.location.href = '/';
+        });
+      });
+    })();
+  </script>
+  {{/if}}
+
+</body>
+
+
+
+<!-- Footer Section -->
+
+<footer id="footer-section">
+  <p class="copyright">
+    &copy; 2014-2015, All Rights Reserved. Designed by & Developed by Designer
+  </p>
+</footer>
+<!-- Footer Section End -->
+
+<!-- jQuery Library -->
+<script type="text/javascript" src="../../public/assets/js/jquery-2.1.0.min.js"></script>
+<!-- Modernizr js -->
+<script type="text/javascript" src="../../public/assets/js/modernizr-2.8.0.min.js"></script>
+<!-- Plugins -->
+<script type="text/javascript" src="../../public/assets/js/plugins.js"></script>
+<!-- Custom JavaScript Functions -->
+<script type="text/javascript" src="../../public/assets/js/functions.js"></script>
+</body>
+</html>
+
+</html>
