@@ -11,9 +11,11 @@ module.exports = {
 
     return router;
   },
+
   index(req, res) {
     res.render('login', { error: req.flash('error') });
   },
+
   login(req, res) {
     passport.authenticate('local', {
       successRedirect: '/profile',
