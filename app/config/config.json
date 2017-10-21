@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "climate_login",
+    "password": "climate_password",
+    "database": "climate_db",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
