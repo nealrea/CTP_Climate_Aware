@@ -25,6 +25,7 @@ module.exports = {
         res.redirect('/profile')
       );
     }).catch(() => {
+      console.log("user creation failed");
       res.render('signup');
     });
   },

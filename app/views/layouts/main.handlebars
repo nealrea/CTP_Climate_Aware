@@ -60,9 +60,11 @@
           <ul class="nav navbar-nav navbar-right">
             {{#if cur_user}}
             <li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-            {{/if}}
+            <li class="nav-item"><a class="nav-link" id="logout" href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+            {{else}}
             <li class="nav-item"><a class="nav-link" href="/signup"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
             <li class='nav-item'><a class="nav-link"href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+            {{/if}}
           </ul>
         </div>
       </nav>
