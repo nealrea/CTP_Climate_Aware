@@ -27,6 +27,8 @@ for(var i in lat){
 var max = prec.data.reduce((max, p) => p.value > max ? p.value : max, prec.data[0].value)
 prec.max = max;
 
-console.log(prec);
+//console.log(prec);
+
+fs.writeFile("./test.json", JSON.stringify(prec));
 
 module.exports = prec;
