@@ -1,6 +1,12 @@
 var testData = {
   max: 8,
-  data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 50.75, lng:-1.55, count: 1}]
+  data: [
+  	{lat: 50, lon:-1, count: 1},
+  	{lat: 52, lon:-1, count: 1.2},
+  	{lat: 54, lon:-1, count: 2.4},
+  	{lat: 56, lon:-1, count: 1.5},
+  	{lat: 58, lon:-1, count: 0.9},
+  ]
 };
 
 var baseLayer = L.tileLayer(
@@ -24,7 +30,7 @@ var cfg = {
   // which field name in your data represents the latitude - default "lat"
   latField: 'lat',
   // which field name in your data represents the longitude - default "lng"
-  lngField: 'lng',
+  lngField: 'lon',
   // which field name in your data represents the data value - default "value"
   valueField: 'count'
 };
@@ -33,7 +39,7 @@ var cfg = {
 var heatmapLayer = new HeatmapOverlay(cfg);
 
 var mymap = new L.Map('mapid', {
-  center: new L.LatLng(0, 0),
+  center: new L.LatLng(51, -1.55),
   zoom: 4,
   layers: [baseLayer, heatmapLayer]
 });
