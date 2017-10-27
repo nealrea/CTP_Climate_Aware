@@ -8,14 +8,27 @@ var reader = new NetCDFReader(data);
 
 var lat = reader.getDataVariable('lat');
 var lon = reader.getDataVariable('lon');
-var precip = reader.getDataVariable('prec');
-var prec = [];
+var diagnostic = reader.getDataVariable('prec');
+var dataObj = {
+	points: [],
+};
 
-var precCount = 0;
-for(var i = 0; i < lat.length; i++){
-	for(var j = 0; j < lon.length; j++){
-		prec.push([lat[i], lon[j], precip[precCount++]])
+var valueCount = 0;
+for(var i in lat){
+	for(var j in lon){
+		dataObj.points.push({
+			lat: lat[i],
+			lon: lon[j],
+			value: diagnostic[valueCount++],
+		})
 	}
 }
 
-console.log(prec);
+var max = dataObj.points.reduce((max, p) => p.value > max ? p.value : max, dataObj.points[0].value)
+dataObj.max = max;
+
+//console.log(prec);
+
+fs.writeFile("./test.json", JSON.stringify(dataObj));
+
+module.exports = dataObj;
