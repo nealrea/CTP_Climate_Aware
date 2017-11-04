@@ -23,7 +23,7 @@
 var HeatmapConfig = {
   defaultRadius: 40,
   defaultRenderer: 'canvas2d',
-  defaultGradient: { 0: "rgb(0,0,255)", 0.142: "rgb(0,128,255)", 0.285: "rgb(0,255,255)", 0.428: "rgb(0,255,0)", 0.571: "rgb(128,255,0)", 0.714: "yellow", 0.857: "rgb(255,128,0)", 1.0: "rgb(255,0,0)"},
+  defaultGradient: { 0: "rgb(0,0,255)", 0.142: "rgb(0,128,255)", 0.285: "rgb(0,255,255)", 0.428: "rgb(0,255,0)", 0.7: "rgb(128,255,0)", 0.9: "yellow", 0.99: "rgb(255,128,0)", 1.0: "rgb(255,0,0)"},
   defaultMaxOpacity: 1,
   defaultMinOpacity: 0,
   defaultBlur: .85,
