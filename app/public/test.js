@@ -81,3 +81,18 @@ var mymapYesReg = new L.Map('mapid2', {
 
 heatmapLayerNoReg.setData(testDataNoReg);
 heatmapLayerYesReg.setData(testDataYesReg);
+
+var displayVal = function(data, map){
+	for ( var i=0; i < data.data.length; ++i ) {  
+		var circle = L.circle([data.data[i].lat, data.data[i].lon]	, {
+		  color: 'transparent',
+		  fillColor: 'transparent', 
+		  fillOpacity: data.data[i].value
+		})
+		.bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451')
+		.addTo(map);
+	};
+};
+
+displayVal(testDataNoReg, mymapNoReg);
+displayVal(testDataYesReg, mymapYesReg);
