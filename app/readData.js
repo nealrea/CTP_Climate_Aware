@@ -1,6 +1,37 @@
 const fs = require('fs');
 const NetCDFReader = require('netcdfjs')
 
+module.exports.calculateData = ((diagnostic,regMode,year) => {
+	const file = fs.readFileSync("../data/" + diagnostic + "-" + regMode + ".nc");
+	var reader = new NetCDFReader(file);
+
+	var lat = reader.getDataVariable('lat')[0];
+	var lon = reader.getDataVariable('lon')[0];
+	var diag = reader.getDataVariable(diagnostic)[year - 2006];
+	var data = {
+		points: [],
+	};
+
+	var valueCount = 0;
+	for(var i in lat){
+		for(var j in lon){
+			data.points.push({
+				lat: lat[i],
+				lon: lon[j] - 180,
+				value: diag[valueCount++] - 273.15,
+			})
+		}
+	}
+
+	var max = data.points.reduce((max, p) => p.value > max ? p.value : max, data.points[0].value)
+	data.max = max;
+	var min = data.points.reduce((min, p) => p.value < min ? p.value : min, data.points[0].value)
+	data.min = min;
+
+	return data;
+});
+
+/*
 var fileNoReg = '../tas_Amon_GISS-E2-H_rcp85_r1i1p1_225101-230012.nc'; //local netCDF file
 var fileYesReg = '../tas_Amon_GISS-E2-H_rcp26_r1i1p1_225101-230012.nc'; //local netCDF file
 
@@ -53,7 +84,8 @@ dataObjYesReg.min = minYesReg;
 
 //console.log(diagnostic[145]);
 
-fs.writeFile("./noReg.json", JSON.stringify(dataObjNoReg));
-fs.writeFile("./yesReg.json", JSON.stringify(dataObjYesReg));
+//fs.writeFile("./noReg.json", JSON.stringify(dataObjNoReg));
+//fs.writeFile("./yesReg.json", JSON.stringify(dataObjYesReg));
 
 module.exports = dataObjNoReg, dataObjYesReg;
+*/
