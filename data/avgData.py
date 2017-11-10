@@ -18,7 +18,7 @@ for diag in diagnostics:
 		lat = np.array(sampleData.variables['lat'])
 		lon = np.array(sampleData.variables['lon'])
 		t = np.arange(2006,2301)	#create time array of years 2006-2300
-		new_file = nc.Dataset(namingDict[diag] + '-' + namingDict[mode] + '.nc','w',format='NETCDF4')
+		new_file = nc.Dataset(diag + '-' + namingDict[mode] + '.nc','w',format='NETCDF4')
 		new_file.createDimension('time', 295)	#create time dimension of years 2301-2006 = 295
 		new_file.createDimension('lat', len(lat))
 		new_file.createDimension('lon', len(lon))
