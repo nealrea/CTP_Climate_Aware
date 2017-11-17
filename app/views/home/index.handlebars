@@ -1,24 +1,22 @@
-<div class="container"  style="margin-top:55px;">
-        <!-- Intro Header -->
-        <header class="intro">
-            <div class="intro-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-md-offset-2">
-<br><br><br><br>
-                            <h1 class="brand-heading">Climate Aware</h1>
-                                
-                            <a href="#" id="trigger" class="btn btn-circle page-scroll">
-                                <i class="fa fa-angle-double-down animated"></i>
-                            </a>
-                            <br><br><br><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-        <!-- About Section -->
+<div class="container"  style="margin-top:55px;">
+        <!-- slide show -->
+        <div class="w3-content w3-section" style="max-width:1000px">
+            <img class="mySlides w3-animate-fading" src="double-world-view.jpg" style="width:100%">
+            <img class="mySlides w3-animate-fading" src="factories.jpg" style="width:100%">
+            <img class="mySlides w3-animate-fading" src="polar-beard.jpg" style="width:100%">
+            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+            </div>
+        </div>
+
+        <!-- Info Section -->
         <section id="about" class="container content-section text-center">
             <div class="row">
                 <div class="col-lg-12 col-lg-offset-2">
@@ -28,3 +26,19 @@
             </div>
         </section>
 </div>
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 9000);    
+}
+</script>
