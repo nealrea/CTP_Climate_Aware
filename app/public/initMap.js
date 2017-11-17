@@ -1,11 +1,9 @@
 var slider = document.getElementById("myRange");
-console.log('value:', slider.value);
 var output = document.getElementById("demo");
 output.innerHTML = 1900 + Number(slider.value);
 var param = 'temp';
 var params = document.getElementById('params');
 params.addEventListener('click', e => {
-  console.log(e.target);
   param = e.target.getAttribute('id');
 });
 

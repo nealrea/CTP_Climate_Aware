@@ -11,6 +11,7 @@ module.exports = {
   },
 
   getDataPoints(req, res) {
+    console.log('processing data...');
     var obj = data.calculateData('pr', 'without-regulations');
     console.log(obj);
     res.json(obj);

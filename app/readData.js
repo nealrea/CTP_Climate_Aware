@@ -3,10 +3,7 @@ const NetCDFReader = require('netcdfjs')
 
 module.exports.calculateData = ((diagnostic,regMode,year) => {
 	var path= __dirname +"/public/data/" + diagnostic + "-" + regMode + ".nc";
-	console.log(path);
-
 	const file = fs.readFileSync(path);
-	console.log(file);
 	var reader = new NetCDFReader(file);
 
 	var lat = reader.getDataVariable('lat')[0];
