@@ -99,6 +99,12 @@ function fetchData() {
 
     console.log(mymapNoReg);
 
+    // Add dynamic URL hash for Leaflet map
+    var allMapLayers = {'base_layer_name': baseLayerNoReg,
+                        'overlay_name': heatmapLayerNoReg};
+    var hash = new L.Hash(mymapNoReg, allMapLayers);
+
+
     // var mymapYesReg = new L.Map('mapid2', {
     //   center: new L.LatLng(0, 0),
     //   zoom: 1,
