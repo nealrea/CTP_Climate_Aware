@@ -2,6 +2,12 @@ var slider = document.getElementById("myRange");
 console.log('value:', slider.value);
 var output = document.getElementById("demo");
 output.innerHTML = 1900 + Number(slider.value);
+var param = 'temp';
+var params = document.getElementById('params');
+params.addEventListener('click', e => {
+  console.log(e.target);
+  param = e.target.getAttribute('id');
+});
 
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -74,7 +80,7 @@ function status(response) {
 }
 
 function json(response) {
-  return response.json()
+  return response.json();
 }
 
 function fetchData() {
@@ -82,7 +88,7 @@ function fetchData() {
   output.innerHTML = year;
   fetch('/map', {
     method: 'POST',
-    body: JSON.stringify({param: 'tempNoReg', year: year}),
+    body: JSON.stringify({diagnostic: 'tempNoReg', year: year}),
     headers: {
       "Content-Type": "application/json"
     }
