@@ -1,10 +1,16 @@
-#mapid1 {
-	height: 300px;
-	width: 500px;
-	margin-right: 30px;
+#maps {
+	width: 1300px;
+	margin-left: 0px;
+	flloat: left;
 }
 
-#mapid2 {
-	height: 300px;
-	width: 500px;
+#mapid1, #mapid2 {
+	height: 340px;
+	width: 520px;
+	margin-right: 10px;
+	float: left;
+}
+
+#clear {
+	clear: both;
 }

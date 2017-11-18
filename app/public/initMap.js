@@ -5,16 +5,16 @@ output.innerHTML = 2006 + Number(slider.value);
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
+  minZoom: 1,
+  maxZoom: 5,
   ext: 'png'
 });
 
 var baseLayerYesReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
+  minZoom: 1,
+  maxZoom: 5,
   ext: 'png'
 });
 
@@ -57,11 +57,18 @@ var cfgYesReg = {
 };
 
 var heatmapLayerNoReg = new HeatmapOverlay(cfgNoReg);
+var heatmapLayerYesReg = new HeatmapOverlay(cfgYesReg);
 
 var mymapNoReg = new L.Map('mapid1', {
   center: new L.LatLng(0, 0),
   zoom: 1,
   layers: [baseLayerNoReg, heatmapLayerNoReg]
+});
+
+var mymapYesReg = new L.Map('mapid2', {
+  center: new L.LatLng(0, 0),
+  zoom: 1,
+  layers: [baseLayerYesReg, heatmapLayerYesReg]
 });
 
 function status(response) {
@@ -87,7 +94,6 @@ function fetchData() {
     }
   }).then(res => res.json()).then(data => {
 
-    // var heatmapLayerYesReg = new HeatmapOverlay(cfgYesReg);
     //console.log(data.max);
 
     heatmapLayerNoReg.setData(data);
@@ -103,13 +109,6 @@ function fetchData() {
     var allMapLayers = {'base_layer_name': baseLayerNoReg,
                         'overlay_name': heatmapLayerNoReg};
     var hash = new L.Hash(mymapNoReg, allMapLayers);
-
-
-    // var mymapYesReg = new L.Map('mapid2', {
-    //   center: new L.LatLng(0, 0),
-    //   zoom: 1,
-    //   layers: [baseLayerYesReg, heatmapLayerYesReg]
-    // });
 
     // heatmapLayerYesReg.setData(testDataYesReg);
 
@@ -129,6 +128,30 @@ function fetchData() {
     // displayVal(testDataNoReg, mymapNoReg);
     // displayVal(testDataYesReg, mymapYesReg);
 
+  }).catch(err => {
+    console.log(err);
+  });
+  fetch('/map', {
+    method: 'POST',
+    body: JSON.stringify({diagnostic: 'tas', regMode: 'with-regulations', year: year}),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json()).then(data => {
+
+    //console.log(data.max);
+
+    heatmapLayerYesReg.setData(data);
+    mymapYesReg.setView([
+      0, 0
+    ], 1, {
+      layers: [baseLayerYesReg, heatmapLayerYesReg]
+    });
+
+    // Add dynamic URL hash for Leaflet map
+    var allMapLayers = {'base_layer_name': baseLayerYesReg,
+                        'overlay_name': heatmapLayerYesReg};
+    var hash = new L.Hash(mymapYesReg, allMapLayers);
   }).catch(err => {
     console.log(err);
   });
