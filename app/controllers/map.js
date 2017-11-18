@@ -11,6 +11,7 @@ module.exports = {
   },
 
   getDataPoints(req, res) {
+	console.log('processing data...');
     currData = data.calculateData(req.body.diagnostic,req.body.regMode,req.body.year);
     //console.log(currData);
     res.json(currData);

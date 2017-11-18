@@ -1,5 +1,4 @@
 var slider = document.getElementById("myRange");
-console.log('value:', slider.value);
 var output = document.getElementById("demo");
 output.innerHTML = 2006 + Number(slider.value);
 
@@ -74,7 +73,7 @@ function status(response) {
 }
 
 function json(response) {
-  return response.json()
+  return response.json();
 }
 
 function fetchData() {
