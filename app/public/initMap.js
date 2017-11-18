@@ -1,7 +1,7 @@
 var slider = document.getElementById("myRange");
 console.log('value:', slider.value);
 var output = document.getElementById("demo");
-output.innerHTML = 1900 + Number(slider.value);
+output.innerHTML = 2006 + Number(slider.value);
 
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -78,26 +78,27 @@ function json(response) {
 }
 
 function fetchData() {
-  var year = 1900 + Number(slider.value);
+  var year = 2006 + Number(slider.value);
   output.innerHTML = year;
   fetch('/map', {
     method: 'POST',
-    body: JSON.stringify({param: 'tempNoReg', year: year}),
+    body: JSON.stringify({diagnostic: 'tas', regMode: 'without-regulations', year: year}),
     headers: {
       "Content-Type": "application/json"
     }
-  }).then(status).then(json).then(testDataNoReg => {
+  }).then(res => res.json()).then(data => {
 
     // var heatmapLayerYesReg = new HeatmapOverlay(cfgYesReg);
+    //console.log(data.max);
 
-    heatmapLayerNoReg.setData(testDataNoReg);
+    heatmapLayerNoReg.setData(data);
     mymapNoReg.setView([
       0, 0
     ], 1, {
       layers: [baseLayerNoReg, heatmapLayerNoReg]
     });
 
-    console.log(mymapNoReg);
+    //console.log(mymapNoReg);
 
     // Add dynamic URL hash for Leaflet map
     var allMapLayers = {'base_layer_name': baseLayerNoReg,

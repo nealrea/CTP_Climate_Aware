@@ -11,14 +11,14 @@ regModes = ['rcp26','rcp85']
 timeSlices = ['200601-205012','205101-210012','210101-215012','215101-220012','220101-225012','225101-230012']
 namingDict = {'pr': 'precipitation', 'tas': 'temperature', 'rcp26': 'with-regulations', 'rcp85': 'without-regulations'}
 
-sampleData = nc.Dataset('pr_Amon_GISS-E2-H_rcp26_r1i1p1_200601-205012.nc')
+sampleData = nc.Dataset('monthlyData/pr_Amon_GISS-E2-H_rcp26_r1i1p1_200601-205012.nc')
 
 for diag in diagnostics:
 	for mode in regModes:
 		lat = np.array(sampleData.variables['lat'])
 		lon = np.array(sampleData.variables['lon'])
 		t = np.arange(2006,2301)	#create time array of years 2006-2300
-		new_file = nc.Dataset(diag + '-' + namingDict[mode] + '.nc','w',format='NETCDF4')
+		new_file = nc.Dataset(diag + '-' + namingDict[mode] + '.nc','w',format='NETCDF3_CLASSIC')
 		new_file.createDimension('time', 295)	#create time dimension of years 2301-2006 = 295
 		new_file.createDimension('lat', len(lat))
 		new_file.createDimension('lon', len(lon))
@@ -31,7 +31,7 @@ for diag in diagnostics:
 
 		finalMean = []
 		for timeSlice in timeSlices:
-			data = nc.Dataset(diag + '_Amon_GISS-E2-H_' + mode + '_r1i1p1_' + timeSlice + '.nc')
+			data = nc.Dataset('monthlyData/' + diag + '_Amon_GISS-E2-H_' + mode + '_r1i1p1_' + timeSlice + '.nc')
 			var = data.variables[diag]
 
 			for i in range(0,len(var)):

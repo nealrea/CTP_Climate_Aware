@@ -1,5 +1,5 @@
 const express = require('express');
-const data = require('../public/sampleData.js');
+const data = require('../public/readData.js');
 
 module.exports = {
   registerRouter() {
@@ -11,7 +11,8 @@ module.exports = {
   },
 
   getDataPoints(req, res) {
-    randData = req.body.year%2 == 0 ? data.testDataNoReg: data.testDataYesReg;
-    res.json(randData);
+    currData = data.calculateData(req.body.diagnostic,req.body.regMode,req.body.year);
+    //console.log(currData);
+    res.json(currData);
   },
 };
