@@ -71,6 +71,9 @@ var mymapYesReg = new L.Map('mapid2', {
   layers: [baseLayerYesReg, heatmapLayerYesReg]
 });
 
+mymapNoReg.sync(mymapYesReg);
+mymapYesReg.sync(mymapNoReg);
+
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
