@@ -15,7 +15,7 @@ https://github.com/olgakent
 
 **Hugo Meza**  
 The City College of New York  
-hgmeza114@gmail.com  
+hgmeza114@gmail.com     
 https://github.com/hgmeza  
 
 **Neal Rea**  
