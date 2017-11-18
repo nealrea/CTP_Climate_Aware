@@ -103,30 +103,26 @@ function fetchData() {
       layers: [baseLayerNoReg, heatmapLayerNoReg]
     });
 
-    //console.log(mymapNoReg);
-
     // Add dynamic URL hash for Leaflet map
     var allMapLayers = {'base_layer_name': baseLayerNoReg,
                         'overlay_name': heatmapLayerNoReg};
     var hash = new L.Hash(mymapNoReg, allMapLayers);
 
-    // heatmapLayerYesReg.setData(testDataYesReg);
-
-    // var displayVal = function(data, map) {
-    //   for (var i = 0; i < data.data.length; ++i) {
-    //     var circle = L.circle([
-    //       data.data[i].lat,
-    //       data.data[i].lon
-    //     ], {
-    //       color: 'transparent',
-    //       fillColor: 'transparent',
-    //       fillOpacity: data.data[i].value
-    //     }).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
-    //   };
-    // };
-    //
-    // displayVal(testDataNoReg, mymapNoReg);
-    // displayVal(testDataYesReg, mymapYesReg);
+    //display tooltip
+    var displayVal = function(data, map) {
+      for (var i = 0; i < data.data.length; ++i) {
+        var circle = L.circle([
+          data.data[i].lat,
+          data.data[i].lon
+        ], {
+          color: 'transparent',
+          fillColor: 'transparent',
+          fillOpacity: data.data[i].value
+        }).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+      };
+    };
+    
+    displayVal(data, mymapNoReg);
 
   }).catch(err => {
     console.log(err);
@@ -152,6 +148,22 @@ function fetchData() {
     var allMapLayers = {'base_layer_name': baseLayerYesReg,
                         'overlay_name': heatmapLayerYesReg};
     var hash = new L.Hash(mymapYesReg, allMapLayers);
+
+    //display tooltip
+    var displayVal = function(data, map) {
+      for (var i = 0; i < data.data.length; ++i) {
+        var circle = L.circle([
+          data.data[i].lat,
+          data.data[i].lon
+        ], {
+          color: 'transparent',
+          fillColor: 'transparent',
+          fillOpacity: data.data[i].value
+        }).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+      };
+    };
+    
+    displayVal(data, mymapYesReg);
 
   }).catch(err => {
     console.log(err);
