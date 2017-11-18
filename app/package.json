@@ -19,6 +19,7 @@
     "heatmap.js": "^2.0.5",
     "leaflet": "^1.2.0",
     "leaflet-heatmap": "^1.0.0",
+    "leaflet.sync": "^0.2.1",
     "method-override": "2.3.10",
     "minimatch": "3.0.4",
     "netcdf4": "^0.2.3",

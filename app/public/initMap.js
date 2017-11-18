@@ -71,6 +71,9 @@ var mymapYesReg = new L.Map('mapid2', {
   layers: [baseLayerYesReg, heatmapLayerYesReg]
 });
 
+mymapNoReg.sync(mymapYesReg);
+mymapYesReg.sync(mymapNoReg);
+
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
@@ -143,12 +146,12 @@ function fetchData() {
     ], 1, {
       layers: [baseLayerYesReg, heatmapLayerYesReg]
     });
-
+/*
     // Add dynamic URL hash for Leaflet map
     var allMapLayers = {'base_layer_name': baseLayerYesReg,
                         'overlay_name': heatmapLayerYesReg};
     var hash = new L.Hash(mymapYesReg, allMapLayers);
-
+*/
     //display tooltip
     var displayVal = function(data, map) {
       for (var i = 0; i < data.data.length; ++i) {
