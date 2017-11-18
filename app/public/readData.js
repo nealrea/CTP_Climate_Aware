@@ -27,10 +27,15 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 		}
 	}
 
-	var max = data.data.reduce((max, p) => p.value > max ? p.value : max, data.data[0].value)
-	data.max = max;
-	var min = data.data.reduce((min, p) => p.value < min ? p.value : min, data.data[0].value)
-	data.min = min;
+	if(diagnostic === "tas"){
+		data.min = -60.45;
+		data.max = 45.12;
+	}else{
+		var max = data.data.reduce((max, p) => p.value > max ? p.value : max, data.data[0].value)
+		data.max = max;
+		var min = data.data.reduce((min, p) => p.value < min ? p.value : min, data.data[0].value)
+		data.min = min;
+	}
 
 	return data;
 };
