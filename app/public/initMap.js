@@ -21,7 +21,7 @@ var baseLayerYesReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/ton
 var cfgNoReg = {
   // radius should be small ONLY if scaleRadius is true (or small radius is intended)
   // if scaleRadius is false it will be the constant radius used in pixels
-  "radius": 4,
+  "radius": 3.5,
   "maxOpacity": .5,
   // scales the radius based on map zoom
   "scaleRadius": true,
@@ -40,7 +40,7 @@ var cfgNoReg = {
 var cfgYesReg = {
   // radius should be small ONLY if scaleRadius is true (or small radius is intended)
   // if scaleRadius is false it will be the constant radius used in pixels
-  "radius": 4,
+  "radius": 3.5,
   "maxOpacity": .5,
   // scales the radius based on map zoom
   "scaleRadius": true,
@@ -152,6 +152,7 @@ function fetchData() {
     var allMapLayers = {'base_layer_name': baseLayerYesReg,
                         'overlay_name': heatmapLayerYesReg};
     var hash = new L.Hash(mymapYesReg, allMapLayers);
+
   }).catch(err => {
     console.log(err);
   });
