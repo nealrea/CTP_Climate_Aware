@@ -173,4 +173,4 @@ function fetchData() {
   });
 }
 fetchData();
-slider.oninput = fetchData;
+slider.onchange = fetchData;
