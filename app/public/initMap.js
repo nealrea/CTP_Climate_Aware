@@ -121,7 +121,7 @@ function fetchData() {
           color: 'transparent',
           fillColor: 'transparent',
           fillOpacity: data.data[i].value
-        }).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+        }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
       };
     };
     
@@ -162,7 +162,7 @@ function fetchData() {
           color: 'transparent',
           fillColor: 'transparent',
           fillOpacity: data.data[i].value
-        }).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+        }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
       };
     };
     
@@ -173,4 +173,4 @@ function fetchData() {
   });
 }
 fetchData();
-slider.oninput = fetchData;
+slider.onchange = fetchData;

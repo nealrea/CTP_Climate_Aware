@@ -19,11 +19,19 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 	var valueCount = 0;
 	for(var i in lat){
 		for(var j in lon){
-			data.data.push({
-				lat: lat[i],
-				lon: lon[j] - 180,
-				value: diag[valueCount++] - 273.15,
-			})
+			if(diagnostic === "tas"){
+				data.data.push({
+					lat: lat[i],
+					lon: lon[j] - 180,
+					value: diag[valueCount++] - 273.15,
+				})
+			}else{
+				data.data.push({
+					lat: lat[i],
+					lon: lon[j] - 180,
+					value: diag[valueCount++],
+				})
+			}
 		}
 	}
 
