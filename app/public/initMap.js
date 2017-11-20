@@ -88,10 +88,11 @@ function json(response) {
 
 function fetchData() {
   var year = 2006 + Number(slider.value);
+  var diagnostic = "tas"; //TODO: link this value to toggle button (temp/precip)
   output.innerHTML = year;
   fetch('/map', {
     method: 'POST',
-    body: JSON.stringify({diagnostic: 'tas', regMode: 'without-regulations', year: year}),
+    body: JSON.stringify({diagnostic: diagnostic, regMode: 'without-regulations', year: year}),
     headers: {
       "Content-Type": "application/json"
     }
@@ -112,27 +113,38 @@ function fetchData() {
     var hash = new L.Hash(mymapNoReg, allMapLayers);
 
     //display tooltip
-    var displayVal = function(data, map) {
+    var displayVal = function(data, map, diagnostic) {
       for (var i = 0; i < data.data.length; ++i) {
-        var circle = L.circle([
-          data.data[i].lat,
-          data.data[i].lon
-        ], {
-          color: 'transparent',
-          fillColor: 'transparent',
-          fillOpacity: data.data[i].value
-        }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
-      };
+        if(diagnostic === "tas"){
+          var circle = L.circle([
+            data.data[i].lat,
+            data.data[i].lon
+          ], {
+            color: 'transparent',
+            fillColor: 'transparent',
+            fillOpacity: data.data[i].value
+          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+        }else{
+          var circle = L.circle([
+            data.data[i].lat,
+            data.data[i].lon
+          ], {
+            color: 'transparent',
+            fillColor: 'transparent',
+            fillOpacity: data.data[i].value
+          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
+        }
+      }
     };
     
-    displayVal(data, mymapNoReg);
+    displayVal(data, mymapNoReg, diagnostic);
 
   }).catch(err => {
     console.log(err);
   });
   fetch('/map', {
     method: 'POST',
-    body: JSON.stringify({diagnostic: 'tas', regMode: 'with-regulations', year: year}),
+    body: JSON.stringify({diagnostic: diagnostic, regMode: 'with-regulations', year: year}),
     headers: {
       "Content-Type": "application/json"
     }
@@ -153,20 +165,31 @@ function fetchData() {
     var hash = new L.Hash(mymapYesReg, allMapLayers);
 */
     //display tooltip
-    var displayVal = function(data, map) {
+    var displayVal = function(data, map, diagnostic) {
       for (var i = 0; i < data.data.length; ++i) {
-        var circle = L.circle([
-          data.data[i].lat,
-          data.data[i].lon
-        ], {
-          color: 'transparent',
-          fillColor: 'transparent',
-          fillOpacity: data.data[i].value
-        }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
-      };
+        if(diagnostic === "tas"){
+          var circle = L.circle([
+            data.data[i].lat,
+            data.data[i].lon
+          ], {
+            color: 'transparent',
+            fillColor: 'transparent',
+            fillOpacity: data.data[i].value
+          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+        }else{
+          var circle = L.circle([
+            data.data[i].lat,
+            data.data[i].lon
+          ], {
+            color: 'transparent',
+            fillColor: 'transparent',
+            fillOpacity: data.data[i].value
+          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
+        }
+      }
     };
     
-    displayVal(data, mymapYesReg);
+    displayVal(data, mymapYesReg, diagnostic);
 
   }).catch(err => {
     console.log(err);
