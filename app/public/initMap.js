@@ -108,9 +108,12 @@ function fetchData() {
     });
 
     // Add dynamic URL hash for Leaflet map
-    var allMapLayers = {'base_layer_name': baseLayerNoReg,
-                        'overlay_name': heatmapLayerNoReg};
+    var allMapLayers = {'base_layer': baseLayerNoReg,
+                        'overlay_heatmap': heatmapLayerNoReg};
     var hash = new L.Hash(mymapNoReg, allMapLayers);
+
+    // Social sharing
+    L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
 
     //display tooltip
     var displayVal = function(data, map, diagnostic) {
@@ -136,7 +139,7 @@ function fetchData() {
         }
       }
     };
-    
+
     displayVal(data, mymapNoReg, diagnostic);
 
   }).catch(err => {
@@ -188,7 +191,7 @@ function fetchData() {
         }
       }
     };
-    
+
     displayVal(data, mymapYesReg, diagnostic);
 
   }).catch(err => {
