@@ -74,6 +74,24 @@ var mymapYesReg = new L.Map('mapid2', {
 mymapNoReg.sync(mymapYesReg);
 mymapYesReg.sync(mymapNoReg);
 
+// control to select countries
+var select = L.countrySelect({title:'Pick a country'});
+select.addTo(mymapNoReg);
+
+    select.on('change', function(e){
+        if (e.feature === undefined){ //Do nothing on title
+            return;
+        }
+        var country = L.geoJson(e.feature);
+        if (this.previousCountry != null){
+            map.removeLayer(this.previousCountry);
+        }
+        this.previousCountry = country;
+        map.addLayer(country);
+        map.fitBounds(country.getBounds());
+
+    });
+
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
@@ -107,12 +125,14 @@ function fetchData() {
       layers: [baseLayerNoReg, heatmapLayerNoReg]
     });
 
-    // Add dynamic URL hash for Leaflet map
+
+
+    // add dynamic URL hash for Leaflet map
     var allMapLayers = {'base_layer': baseLayerNoReg,
                         'overlay_heatmap': heatmapLayerNoReg};
     var hash = new L.Hash(mymapNoReg, allMapLayers);
 
-    // Social sharing
+    // social sharing
     L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
 
     //display tooltip
