@@ -11,9 +11,12 @@ module.exports = {
   },
 
   getDataPoints(req, res) {
-	console.log('processing data...');
-    currData = data.calculateData(req.body.diagnostic,req.body.regMode,req.body.year);
-    //console.log(currData);
-    res.json(currData);
+     data_r= data.calculateData(req.body.diagnostic,'with-regulations',req.body.year);
+     data_nr = data.calculateData(req.body.diagnostic,'without-regulations',req.body.year);
+     dataObj = {
+       'with-regulations' : data_r,
+       'without-regulations': data_nr
+     };
+     res.json(dataObj);
   },
 };

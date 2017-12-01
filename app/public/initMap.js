@@ -2,7 +2,7 @@ var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = 2006 + Number(slider.value);
 
-let diagnostic  = 'tas';
+let diagnostic = 'tas';
 
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -93,7 +93,7 @@ function fetchData() {
   output.innerHTML = year;
   fetch('/map', {
     method: 'POST',
-    body: JSON.stringify({diagnostic: diagnostic, regMode: 'without-regulations', year: year}),
+    body: JSON.stringify({diagnostic: diagnostic, year: year}),
     headers: {
       "Content-Type": "application/json"
     }
@@ -101,18 +101,68 @@ function fetchData() {
 
     //console.log(data.max);
 
-    heatmapLayerNoReg.setData(data);
+    heatmapLayerNoReg.setData(data['without-regulations']);
     mymapNoReg.setView([
       0, 0
     ], 1, {
       layers: [baseLayerNoReg, heatmapLayerNoReg]
     });
 
-    // Add dynamic URL hash for Leaflet map
-    var allMapLayers = {'base_layer_name': baseLayerNoReg,
-                        'overlay_name': heatmapLayerNoReg};
-//    var hash = new L.Hash(mymapNoReg, allMapLayers);
+    heatmapLayerYesReg.setData(data['with-regulations']);
+    mymapYesReg.setView([
+      0, 0
+    ], 1, {
+      layers: [baseLayerYesReg, heatmapLayerYesReg]
+    });
 
+
+    // Add dynamic URL hash for Leaflet map
+    // var allMapLayers = {
+    //   'base_layer_name': baseLayerNoReg,
+    //   'overlay_name': heatmapLayerNoReg
+    // };
+
+       // var hash = new L.Hash(mymapNoReg, allMapLayers);
+
+    //  display tooltip
+    // var displayVal = function(data, map, diagnostic) {
+    //   for (var i = 0; i < data.data.length; ++i) {
+    //     if(diagnostic === "tas"){
+    //       var circle = L.circle([
+    //         data.data[i].lat,
+    //         data.data[i].lon
+    //       ], {
+    //         color: 'transparent',
+    //         fillColor: 'transparent',
+    //         fillOpacity: data.data[i].value
+    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+    //     }else{
+    //       var circle = L.circle([
+    //         data.data[i].lat,
+    //         data.data[i].lon
+    //       ], {
+    //         color: 'transparent',
+    //         fillColor: 'transparent',
+    //         fillOpacity: data.data[i].value
+    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
+    //     }
+    //   }
+    // };
+    //
+    // displayVal(data, mymapNoReg, diagnostic);
+
+  }).catch(err => {
+    console.log(err);
+  });
+
+
+    //console.log(data.max);
+    /*
+    // Add dynamic URL hash for Leaflet map
+    var allMapLayers = {'base_layer_name': baseLayerYesReg,
+                        'overlay_name': heatmapLayerYesReg};
+    var hash = new L.Hash(mymapYesReg, allMapLayers);
+*/
   //  display tooltip
     // var displayVal = function(data, map, diagnostic) {
     //   for (var i = 0; i < data.data.length; ++i) {
@@ -137,70 +187,60 @@ function fetchData() {
     //     }
     //   }
     // };
-
-    // displayVal(data, mymapNoReg, diagnostic);
-
-  }).catch(err => {
-    console.log(err);
-  });
-
-  fetch('/map', {
-    method: 'POST',
-    body: JSON.stringify({diagnostic: diagnostic, regMode: 'with-regulations', year: year}),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => res.json()).then(data => {
-
-    //console.log(data.max);
-
-    heatmapLayerYesReg.setData(data);
-    mymapYesReg.setView([
-      0, 0
-    ], 1, {
-      layers: [baseLayerYesReg, heatmapLayerYesReg]
-    });
-/*
-    // Add dynamic URL hash for Leaflet map
-    var allMapLayers = {'base_layer_name': baseLayerYesReg,
-                        'overlay_name': heatmapLayerYesReg};
-    var hash = new L.Hash(mymapYesReg, allMapLayers);
-*/
-    //display tooltip
-    // var displayVal = function(data, map, diagnostic) {
-    //   for (var i = 0; i < data.data.length; ++i) {
-    //     if(diagnostic === "tas"){
-    //       var circle = L.circle([
-    //         data.data[i].lat,
-    //         data.data[i].lon
-    //       ], {
-    //         color: 'transparent',
-    //         fillColor: 'transparent',
-    //         fillOpacity: data.data[i].value
-    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
-    //     }else{
-    //       var circle = L.circle([
-    //         data.data[i].lat,
-    //         data.data[i].lon
-    //       ], {
-    //         color: 'transparent',
-    //         fillColor: 'transparent',
-    //         fillOpacity: data.data[i].value
-    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
-    //     }
-    //   }
-    // };
-
+    //
     // displayVal(data, mymapYesReg, diagnostic);
-
-  }).catch(err => {
-    console.log(err);
-  });
 }
+
 fetchData();
 slider.onchange = fetchData;
 
-document.querySelector('#params').onchange = function(event){
-    diagnostic = event.target.getAttribute('id');
+document.querySelector('#params').onchange = function(event) {
+  diagnostic = event.target.getAttribute('id');
+  fetchData();
+};
+
+var timeLapseBtn = document.querySelector('#timelapse');
+var stopTimerBtn = document.querySelector('#stop-time');
+
+let i = 0;
+let MAX_COUNT = 294;
+let stopTimer = false;
+let interval = 500;
+
+const initSetTimeOut = (callback) => {
+  setTimeout(callback, interval);
+};
+
+const setValue = (year) => {
+  slider.value = year;
+  fetchData();
+  if (!stopTimer) initTimeLapse();
+};
+
+const initTimeLapse = () => {
+  stopTimer = false;
+  if(i++ < MAX_COUNT)
+    initSetTimeOut(setValue.bind(null, i))
+};
+
+timeLapseBtn.onclick = function(e){
+  e.target.disabled = true;
+  stopTimerBtn.value = "Stop";
+  i = slider.value;
+  initTimeLapse();
+};
+
+stopTimerBtn.onclick =function(e) {
+  stopTimer = true;
+  timeLapseBtn.disabled= false;
+  if (e.target.value == "Reset") {
+    i = 0; speed=1;
+    slider.value = 0;
+    e.target.value = "Stop";
+    timeLapseBtn.value = "Timelapse";
     fetchData();
-  };
+    return;
+  }
+  timeLapseBtn.value = "Resume";
+  e.target.value= "Reset"
+};
