@@ -16,6 +16,8 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 		data: [],
 	};
 
+
+
 	var valueCount = 0;
 	for(var i in lat){
 		for(var j in lon){
@@ -23,7 +25,7 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 				data.data.push({
 					lat: lat[i],
 					lon: lon[j] - 180,
-					value: diag[valueCount++] - 273.15,
+					value: (diag[valueCount++] - 273.15) * (regMode == "without-regulations") ? 20 : 1 ,
 				})
 			}else{
 				data.data.push({
@@ -36,8 +38,8 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 	}
 
 	if(diagnostic === "tas"){
-		data.min = -60.45;
-		data.max = 45.12;
+		data.min = -60.45 ;
+		data.max = 45.12 ;
 	}else{
 		var max = data.data.reduce((max, p) => p.value > max ? p.value : max, data.data[0].value)
 		data.max = max;
