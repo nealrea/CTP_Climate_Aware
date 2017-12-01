@@ -115,7 +115,8 @@ function fetchData() {
       layers: [baseLayerYesReg, heatmapLayerYesReg]
     });
 
-
+    // social sharing
+    // L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
     // Add dynamic URL hash for Leaflet map
     // var allMapLayers = {
     //   'base_layer_name': baseLayerNoReg,
@@ -190,6 +191,9 @@ function fetchData() {
     //
     // displayVal(data, mymapYesReg, diagnostic);
 }
+
+// social sharing
+L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
 
 fetchData();
 slider.onchange = fetchData;
