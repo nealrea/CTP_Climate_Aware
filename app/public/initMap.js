@@ -197,7 +197,10 @@ function fetchData() {
 L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
 
 fetchData();
-slider.onchange = fetchData;
+slider.onchange = () =>{
+  zoom = mymapNoReg.getZoom();
+  fetchData();
+}
 
 document.querySelector('#params').onchange = function(event) {
   diagnostic = event.target.getAttribute('id');
