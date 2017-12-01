@@ -2,6 +2,8 @@ var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = 2006 + Number(slider.value);
 
+let diagnostic  = 'tas';
+
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   subdomains: 'abcd',
@@ -88,7 +90,6 @@ function json(response) {
 
 function fetchData() {
   var year = 2006 + Number(slider.value);
-  var diagnostic = "tas"; //TODO: link this value to toggle button (temp/precip)
   output.innerHTML = year;
   fetch('/map', {
     method: 'POST',
@@ -110,38 +111,39 @@ function fetchData() {
     // Add dynamic URL hash for Leaflet map
     var allMapLayers = {'base_layer_name': baseLayerNoReg,
                         'overlay_name': heatmapLayerNoReg};
-    var hash = new L.Hash(mymapNoReg, allMapLayers);
+//    var hash = new L.Hash(mymapNoReg, allMapLayers);
 
-    //display tooltip
-    var displayVal = function(data, map, diagnostic) {
-      for (var i = 0; i < data.data.length; ++i) {
-        if(diagnostic === "tas"){
-          var circle = L.circle([
-            data.data[i].lat,
-            data.data[i].lon
-          ], {
-            color: 'transparent',
-            fillColor: 'transparent',
-            fillOpacity: data.data[i].value
-          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
-        }else{
-          var circle = L.circle([
-            data.data[i].lat,
-            data.data[i].lon
-          ], {
-            color: 'transparent',
-            fillColor: 'transparent',
-            fillOpacity: data.data[i].value
-          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
-        }
-      }
-    };
-    
-    displayVal(data, mymapNoReg, diagnostic);
+  //  display tooltip
+    // var displayVal = function(data, map, diagnostic) {
+    //   for (var i = 0; i < data.data.length; ++i) {
+    //     if(diagnostic === "tas"){
+    //       var circle = L.circle([
+    //         data.data[i].lat,
+    //         data.data[i].lon
+    //       ], {
+    //         color: 'transparent',
+    //         fillColor: 'transparent',
+    //         fillOpacity: data.data[i].value
+    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+    //     }else{
+    //       var circle = L.circle([
+    //         data.data[i].lat,
+    //         data.data[i].lon
+    //       ], {
+    //         color: 'transparent',
+    //         fillColor: 'transparent',
+    //         fillOpacity: data.data[i].value
+    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
+    //     }
+    //   }
+    // };
+
+    // displayVal(data, mymapNoReg, diagnostic);
 
   }).catch(err => {
     console.log(err);
   });
+
   fetch('/map', {
     method: 'POST',
     body: JSON.stringify({diagnostic: diagnostic, regMode: 'with-regulations', year: year}),
@@ -165,31 +167,31 @@ function fetchData() {
     var hash = new L.Hash(mymapYesReg, allMapLayers);
 */
     //display tooltip
-    var displayVal = function(data, map, diagnostic) {
-      for (var i = 0; i < data.data.length; ++i) {
-        if(diagnostic === "tas"){
-          var circle = L.circle([
-            data.data[i].lat,
-            data.data[i].lon
-          ], {
-            color: 'transparent',
-            fillColor: 'transparent',
-            fillOpacity: data.data[i].value
-          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
-        }else{
-          var circle = L.circle([
-            data.data[i].lat,
-            data.data[i].lon
-          ], {
-            color: 'transparent',
-            fillColor: 'transparent',
-            fillOpacity: data.data[i].value
-          }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
-        }
-      }
-    };
-    
-    displayVal(data, mymapYesReg, diagnostic);
+    // var displayVal = function(data, map, diagnostic) {
+    //   for (var i = 0; i < data.data.length; ++i) {
+    //     if(diagnostic === "tas"){
+    //       var circle = L.circle([
+    //         data.data[i].lat,
+    //         data.data[i].lon
+    //       ], {
+    //         color: 'transparent',
+    //         fillColor: 'transparent',
+    //         fillOpacity: data.data[i].value
+    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+    //     }else{
+    //       var circle = L.circle([
+    //         data.data[i].lat,
+    //         data.data[i].lon
+    //       ], {
+    //         color: 'transparent',
+    //         fillColor: 'transparent',
+    //         fillOpacity: data.data[i].value
+    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
+    //     }
+    //   }
+    // };
+
+    // displayVal(data, mymapYesReg, diagnostic);
 
   }).catch(err => {
     console.log(err);
@@ -197,3 +199,8 @@ function fetchData() {
 }
 fetchData();
 slider.onchange = fetchData;
+
+document.querySelector('#params').onchange = function(event){
+    diagnostic = event.target.getAttribute('id');
+    fetchData();
+  };
