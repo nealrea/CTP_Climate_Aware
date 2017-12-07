@@ -1,53 +1,114 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 <style>
-img {
-    max-width: 1000px
-    max-height: 500px;
-    overflow: hidden;
-}
-.edits {
-    margin-top: -200px;
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #008080;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 50%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 }
 
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.page-heading {
+    margin-right: -300px;
+}
 </style>
-<div class="container"  style="margin-top:55px;">
-        <!-- slide show -->
-        <div class="w3-content w3-section" style="max-width:1000px">
-            <h2>Landing Page</h2>
-            <img class="mySlides w3-animate-fading" src="double-world-view.jpg" style="width:100%">
 
-            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-            </div>
+<div class="container" style="margin-top:80px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Climate Change: Do Humans Matter?</h1>
+          <hr class="small">
         </div>
+      </div>
+    </div>
 
-        <!-- Info Section -->
-        <section id="about" class="container content-section text-center">
-            <div class="row">
-                <div class="col-lg-12 col-lg-offset-2 edits">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="row">
+      <div class="col-lg-6">
+        <div id="maps">
+            <div id="map-titles">
+                <div id="mapid1-title" class="col-lg-5">
+                    <h4>Unregulated Emissions</h4>
+                </div>
+                <div id="mapid2-title">
+                    <h4>Regulated Emissions</h4>
                 </div>
             </div>
-        </section>
-</div>
-<script>
-var myIndex = 0;
-carousel();
+            <div id="mapid1"></div>
+            <div id="mapid2"></div>
+            <div id="clear"></div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 text-center ">
+        <div class="">
+          <div class="btn-group" id='params' data-toggle="buttons">
+            <label class="btn btn-secondary active" id='temp'>
+              <input type="radio" name="options" id="tas" autocomplete="off" checked> Temperature</label>
+                      <label class="btn btn-secondary" id='prec'>
+              <input type="radio" name="options" id="pr" autocomplete="off"> Precipitation</label>
+          </div>
+        </div>
+        <div id="slidecontainer">
+          <input type="range" min="0" max="294" value="0" class="slider" id="myRange">
+        </div>
+        <div>
+          <h5 id="demo">50</h5>
+        </div>
+        <div class="">
+          <input type="button" class="btn btn-success" value="timelapse" name="timelapse" id="timelapse">
+          <input type="button" class="btn btn-danger" value="stop"  id="stop-time">
+        </div><br>
+        <!-- <div class="">
+        <a href="#" class="btn btn-secondary">
+          <span id="reset-timer">Reset</span>
+        </a>
+        </div> -->
+      </div>
+    </div>
 
-function carousel() {
-    var idx;
-    var element = document.getElementsByClassName("mySlides");
-    for (idx = 0; i < element.length; idx++) {
-       element[idx].style.display = "none";
-    }
-    myIndex++;
-    if (myIndex > element.length) {myIndex = 1}
-    element[myIndex-1].style.display = "block";
-    setTimeout(carousel, 9000);
-}
-</script>
+  </div>
+</div>
+
+

@@ -11,6 +11,10 @@
 	float: left;
 }
 
+#mapid1-title, #mapid2-title {
+	display: inline-block;
+}
+
 #clear {
 	clear: both;
 }
