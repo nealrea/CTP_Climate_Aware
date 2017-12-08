@@ -4,6 +4,7 @@ output.innerHTML = 2006 + Number(slider.value);
 
 let diagnostic = 'tas';
 let zoom = 1;
+let center;
 
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -101,18 +102,20 @@ function fetchData() {
   }).then(res => res.json()).then(data => {
 
     //console.log(data.max);
+    center = mymapYesReg.getCenter(); 
+    zoom = mymapYesReg.getZoom();
 
     heatmapLayerNoReg.setData(data['without-regulations']);
-    mymapNoReg.setView([
-      0, 0
-    ], zoom, {
+    mymapNoReg.setView(
+      center, 
+      zoom, {
       layers: [baseLayerNoReg, heatmapLayerNoReg]
     });
 
     heatmapLayerYesReg.setData(data['with-regulations']);
-    mymapYesReg.setView([
-      0, 0
-    ], zoom, {
+    mymapYesReg.setView(
+      center, 
+      zoom, {
       layers: [baseLayerYesReg, heatmapLayerYesReg]
     });
 
@@ -237,7 +240,8 @@ const initTimeLapse = () => {
 };
 
 timeLapseBtn.onclick = function(e){
-  zoom = mymapNoReg.getZoom();
+  //zoom = mymapYesReg.getZoom();
+  //center = mymapYesReg.getCenter();
   e.target.disabled = true;
   stopTimerBtn.value = "Stop";
   i = slider.value;
