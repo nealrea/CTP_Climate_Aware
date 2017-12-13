@@ -16,6 +16,8 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 		data: [],
 	};
 
+
+
 	var valueCount = 0;
 	for(var i in lat){
 		for(var j in lon){
@@ -35,9 +37,10 @@ module.exports.calculateData = (diagnostic,regMode,year) => {
 		}
 	}
 
+	//static min/max for color standardization
 	if(diagnostic === "tas"){
-		data.min = -60.45;
-		data.max = 45.12;
+		data.min = -10 ; //chop min to exagerate color
+		data.max = 45.12 ;
 	}else{
 		var max = data.data.reduce((max, p) => p.value > max ? p.value : max, data.data[0].value)
 		data.max = max;

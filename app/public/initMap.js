@@ -3,6 +3,8 @@ var output = document.getElementById("demo");
 output.innerHTML = 2006 + Number(slider.value);
 
 let diagnostic = 'tas';
+let zoom = 1;
+let center;
 
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -100,22 +102,25 @@ function fetchData() {
   }).then(res => res.json()).then(data => {
 
     //console.log(data.max);
+    center = mymapYesReg.getCenter(); 
+    zoom = mymapYesReg.getZoom();
 
     heatmapLayerNoReg.setData(data['without-regulations']);
-    mymapNoReg.setView([
-      0, 0
-    ], 1, {
+    mymapNoReg.setView(
+      center, 
+      zoom, {
       layers: [baseLayerNoReg, heatmapLayerNoReg]
     });
 
     heatmapLayerYesReg.setData(data['with-regulations']);
-    mymapYesReg.setView([
-      0, 0
-    ], 1, {
+    mymapYesReg.setView(
+      center, 
+      zoom, {
       layers: [baseLayerYesReg, heatmapLayerYesReg]
     });
 
-
+    // social sharing
+    // L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
     // Add dynamic URL hash for Leaflet map
     // var allMapLayers = {
     //   'base_layer_name': baseLayerNoReg,
@@ -126,30 +131,30 @@ function fetchData() {
 
     //  display tooltip
     // var displayVal = function(data, map, diagnostic) {
-    //   for (var i = 0; i < data.data.length; ++i) {
+    //   for (var i = 0; i < data["without-regulations"].data.length; ++i) {
     //     if(diagnostic === "tas"){
     //       var circle = L.circle([
-    //         data.data[i].lat,
-    //         data.data[i].lon
+    //         data["without-regulations"].data[i].lat,
+    //         data["without-regulations"].data[i].lon
     //       ], {
     //         color: 'transparent',
     //         fillColor: 'transparent',
-    //         fillOpacity: data.data[i].value
-    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
+    //         fillOpacity: data["without-regulations"].data[i].value
+    //       }).setRadius(500000).bindTooltip(data["without-regulations"].data[i].value.toFixed(1) + ' ' + '&#8451').addTo(map);
     //     }else{
     //       var circle = L.circle([
-    //         data.data[i].lat,
-    //         data.data[i].lon
+    //         data["without-regulations"].data[i].lat,
+    //         data["without-regulations"].data[i].lon
     //       ], {
     //         color: 'transparent',
     //         fillColor: 'transparent',
-    //         fillOpacity: data.data[i].value
-    //       }).setRadius(500000).bindTooltip(data.data[i].value.toFixed(7) + ' mm').addTo(map);
+    //         fillOpacity: data["without-regulations"].data[i].value
+    //       }).setRadius(500000).bindTooltip(data["without-regulations"].data[i].value.toFixed(7) + ' mm').addTo(map);
     //     }
     //   }
     // };
     //
-    // displayVal(data, mymapNoReg, diagnostic);
+    // displayVal(data["without-regulations"], mymapNoReg, diagnostic);
 
   }).catch(err => {
     console.log(err);
@@ -191,6 +196,17 @@ function fetchData() {
     // displayVal(data, mymapYesReg, diagnostic);
 }
 
+// Add dynamic URL hash for Leaflet map
+var allMapLayers = {
+   'base_layer_name': baseLayerNoReg,
+   'overlay_name': heatmapLayerNoReg
+ };
+
+var hash = new L.Hash(mymapNoReg, allMapLayers);
+
+// social sharing
+L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
+
 fetchData();
 slider.onchange = fetchData;
 
@@ -224,6 +240,8 @@ const initTimeLapse = () => {
 };
 
 timeLapseBtn.onclick = function(e){
+  //zoom = mymapYesReg.getZoom();
+  //center = mymapYesReg.getCenter();
   e.target.disabled = true;
   stopTimerBtn.value = "Stop";
   i = slider.value;

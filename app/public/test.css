@@ -11,6 +11,16 @@
 	float: left;
 }
 
+#mapid1-title, #mapid2-title {
+	display: inline-block;
+}
+
 #clear {
 	clear: both;
+}
+
+.leaflet-social-control a {
+  font-size: 200%;
+  color: darkslateblue;
+  text-decoration: none;
 }
