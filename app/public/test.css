@@ -43,6 +43,25 @@
 	text-align: left;
 }
 
+#years {
+	width: 130px;
+	margin-top: 10px;
+	margin-left: 460px;
+	margin-bottom: 0;
+}
+
+#year {
+	display: inline;
+	float: left;
+	margin-bottom: 10px;
+}
+
+#demo {
+	display: inline;
+	float: right;
+	margin-bottom: 10px;
+}
+
 .leaflet-social-control a {
   font-size: 200%;
   color: darkslateblue;
