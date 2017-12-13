@@ -201,30 +201,30 @@ function fetchData() {
 function climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg){
   var year = 2006 + Number(slider.value);
   if(seaLevelRiseNoReg < 3){
-    document.getElementById("noRegText").innerHTML = "Status: Normal";
+    document.getElementById("noRegText").innerHTML = "NYC Status: Normal";
     document.getElementById("noRegText").style.background = "#46FE01";
   }else if(seaLevelRiseNoReg < 5){
-    document.getElementById("noRegText").innerHTML = "Status: Westside Highway underwater";
+    document.getElementById("noRegText").innerHTML = "NYC Status: Westside Highway underwater";
     document.getElementById("noRegText").style.background = "#FDF902";
   }else if(seaLevelRiseNoReg < 15){
-    document.getElementById("noRegText").innerHTML = "Status: Everything south of Canal street is an island";
+    document.getElementById("noRegText").innerHTML = "NYC Status: Everything south of Canal street is an island";
     document.getElementById("noRegText").style.background = "#FEB901";
   }else{
-    document.getElementById("noRegText").innerHTML = "Status: Sea water surrounds pools at 9/11 memorial";
+    document.getElementById("noRegText").innerHTML = "NYC Status: Sea water surrounds pools at 9/11 memorial";
     document.getElementById("noRegText").style.background = "#FE0101";
   }
 
   if(seaLevelRiseYesReg < 3){
-    document.getElementById("yesRegText").innerHTML = "Status: Normal";
+    document.getElementById("yesRegText").innerHTML = "NYC Status: Normal";
     document.getElementById("yesRegText").style.background = "#46FE01";
   }else if(seaLevelRiseYesReg < 5){
-    document.getElementById("yesRegText").innerHTML = "Status: Westside Highway underwater";
+    document.getElementById("yesRegText").innerHTML = "NYC Status: Westside Highway underwater";
     document.getElementById("yesRegText").style.background = "#FDF902";
   }else if(seaLevelRiseYesReg < 15){
-    document.getElementById("yesRegText").innerHTML = "Status: Everything south of Canal street is an island";
+    document.getElementById("yesRegText").innerHTML = "NYC Status: Everything south of Canal street is an island";
     document.getElementById("yesRegText").style.background = "#FEB901";
   }else{
-    document.getElementById("yesRegText").innerHTML = "Status: Sea water surrounds pools at 9/11 memorial";
+    document.getElementById("yesRegText").innerHTML = "NYC Status: Sea water surrounds pools at 9/11 memorial";
     document.getElementById("yesRegText").style.background = "#FE0101";
   }
 };
@@ -232,11 +232,11 @@ function climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg){
 function seaLevel(){
   seaLevelRiseNoReg = Number(slider.value) * 0.05278357; //RCP 8.5
   seaLevelRiseNoReg = Math.round(seaLevelRiseNoReg*100) / 100
-  document.getElementById("seaLevelNoReg").innerHTML = "NYC Sea-level rise: " + String(seaLevelRiseNoReg) + "ft";
+  document.getElementById("seaLevelNoReg").innerHTML = "Sea-level rise: " + String(seaLevelRiseNoReg) + "ft";
 
   seaLevelRiseYesReg = Number(slider.value) * 0.01138251; //RCP 2.6
   seaLevelRiseYesReg = Math.round(seaLevelRiseYesReg*100) / 100
-  document.getElementById("seaLevelYesReg").innerHTML = "NYC Sea-level rise: " + String(seaLevelRiseYesReg) + "ft";
+  document.getElementById("seaLevelYesReg").innerHTML = "Sea-level rise: " + String(seaLevelRiseYesReg) + "ft";
 }
 
 // Add dynamic URL hash for Leaflet map
