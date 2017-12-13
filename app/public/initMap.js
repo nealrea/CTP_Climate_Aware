@@ -5,6 +5,8 @@ output.innerHTML = 2006 + Number(slider.value);
 let diagnostic = 'tas';
 let zoom = 1;
 let center;
+let seaLevelRiseNoReg = 0;
+let seaLevelRiseYesReg = 0;
 
 var baseLayerNoReg = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -196,30 +198,46 @@ function fetchData() {
     // displayVal(data, mymapYesReg, diagnostic);
 }
 
-function climateEffect(){
+function climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg){
   var year = 2006 + Number(slider.value);
-  if(year < 2100){
-    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Normal";
+  if(seaLevelRiseNoReg < 3){
+    document.getElementById("noRegText").innerHTML = "Status: Normal";
     document.getElementById("noRegText").style.background = "#46FE01";
-    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Normal";
-    document.getElementById("yesRegText").style.background = "#46FE01";
-  }else if(year < 2200){
-    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
+  }else if(seaLevelRiseNoReg < 5){
+    document.getElementById("noRegText").innerHTML = "Status: Westside Highway underwater";
     document.getElementById("noRegText").style.background = "#FDF902";
-    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Normal";
-    document.getElementById("yesRegText").style.background = "#46FE01";
-  }else if(year < 2290){
-    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Everything south of Canal street is an island";
+  }else if(seaLevelRiseNoReg < 15){
+    document.getElementById("noRegText").innerHTML = "Status: Everything south of Canal street is an island";
     document.getElementById("noRegText").style.background = "#FEB901";
-    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
-    document.getElementById("yesRegText").style.background = "#FDF902";
   }else{
-    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Sea water surrounds pools at 9/11 memorial";
+    document.getElementById("noRegText").innerHTML = "Status: Sea water surrounds pools at 9/11 memorial";
     document.getElementById("noRegText").style.background = "#FE0101";
-    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
+  }
+
+  if(seaLevelRiseYesReg < 3){
+    document.getElementById("yesRegText").innerHTML = "Status: Normal";
+    document.getElementById("yesRegText").style.background = "#46FE01";
+  }else if(seaLevelRiseYesReg < 5){
+    document.getElementById("yesRegText").innerHTML = "Status: Westside Highway underwater";
     document.getElementById("yesRegText").style.background = "#FDF902";
+  }else if(seaLevelRiseYesReg < 15){
+    document.getElementById("yesRegText").innerHTML = "Status: Everything south of Canal street is an island";
+    document.getElementById("yesRegText").style.background = "#FEB901";
+  }else{
+    document.getElementById("yesRegText").innerHTML = "Status: Sea water surrounds pools at 9/11 memorial";
+    document.getElementById("yesRegText").style.background = "#FE0101";
   }
 };
+
+function seaLevel(){
+  seaLevelRiseNoReg = Number(slider.value) * 0.05278357; //RCP 8.5
+  seaLevelRiseNoReg = Math.round(seaLevelRiseNoReg*100) / 100
+  document.getElementById("seaLevelNoReg").innerHTML = "NYC Sea-level rise: " + String(seaLevelRiseNoReg) + "ft";
+
+  seaLevelRiseYesReg = Number(slider.value) * 0.01138251; //RCP 2.6
+  seaLevelRiseYesReg = Math.round(seaLevelRiseYesReg*100) / 100
+  document.getElementById("seaLevelYesReg").innerHTML = "NYC Sea-level rise: " + String(seaLevelRiseYesReg) + "ft";
+}
 
 // Add dynamic URL hash for Leaflet map
 var allMapLayers = {
@@ -233,16 +251,19 @@ var hash = new L.Hash(mymapNoReg, allMapLayers);
 L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
 
 fetchData();
-climateEffect();
+seaLevel();
+climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg);
 slider.onchange = function(){
   fetchData();
-  climateEffect();
+  seaLevel();
+  climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg);
 };
 
 document.querySelector('#params').onchange = function(event) {
   diagnostic = event.target.getAttribute('id');
   fetchData();
-  climateEffect();
+  seaLevel();
+  climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg);
 };
 
 var timeLapseBtn = document.querySelector('#timelapse');
@@ -260,7 +281,8 @@ const initSetTimeOut = (callback) => {
 const setValue = (year) => {
   slider.value = year;
   fetchData();
-  climateEffect();
+  seaLevel();
+  climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg);
   if (!stopTimer) initTimeLapse();
 };
 
@@ -288,7 +310,8 @@ stopTimerBtn.onclick =function(e) {
     e.target.value = "Stop";
     timeLapseBtn.value = "Timelapse";
     fetchData();
-    climateEffect();
+    seaLevel();
+    climateEffect(seaLevelRiseNoReg, seaLevelRiseYesReg);
     return;
   }
   timeLapseBtn.value = "Resume";
