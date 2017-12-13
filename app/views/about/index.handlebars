@@ -3,13 +3,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-img {
-    max-width: 1000px
-    max-height: 500px;
-    overflow: hidden;
+body {
+    background-image: url(backgroundAbout.jpg);
+    background-repeat: no-repeat;
+    margin: auto;
+    font-weight: bold;
 }
 .edits {
     margin-top: -200px;
+}
+.why {
+    margin-top: -22px;
 }
 
 .center {
@@ -35,26 +39,10 @@ img {
     </section>
 </div>
 
-<div class="container">
-        <!-- slide show -->
-        <div class="w3-content w3-section" style="max-width:1000px">
-            <img class="mySlides w3-animate-fading" src="double-world-view.jpg" style="width:100%">
-
-            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-            </div>
-        </div>
-</div>
-
-
 <div class="container move">
     <section class="container content-section text-center">
         <div class="row">
-            <div class="col-lg-12 col-lg-offset-2">
+            <div class="col-lg-12 col-lg-offset-2 why">
                     <h2>Why do we care?</h2>
                     <p>
                         Climate change is real and it is happening right now. While the vast majority of scientists and politicians agree that the Earth cycles through natural changes in climate throughout time, the debate on the significance of anthropogenic effects on climate change is at the center of a growing rift between the political and scientific communities. Scientists have compelling evidence that human interactions with the planet are indeed contributing to and compounding the natural climate cycles of the Earth. It is crucial that we work to create new distribution methods of this information so that the public can be informed and politicians can enact legislation to contain and regulate anthropogenic contributions to climate change.
@@ -64,7 +52,7 @@ img {
                         The scientific community is always seeking new methods of content distribution in an effort to convey important climate information to as many individuals as possible. While some distribution media do exist currently, our project's value lies in its social sharing capabilities. The ability to start a dialogue between users on popular social platforms is crucial to the advancement of the anthropogenic emission regulation agenda.
                     </p>
                 <br>
-                <img class="center" src="environment.jpg">
+                
                 <br><br>
 
                     <p><a href="/people">Meet the team!</a></p>
@@ -72,21 +60,4 @@ img {
         </div>
     </section>
 </div>
-
-<script>
-var myIndex = 0;
-carousel();
-
-function carousel() {
-    var idx;
-    var element = document.getElementsByClassName("mySlides");
-    for (idx = 0; i < element.length; idx++) {
-       element[idx].style.display = "none";
-    }
-    myIndex++;
-    if (myIndex > element.length) {myIndex = 1}
-    element[myIndex-1].style.display = "block";
-    setTimeout(carousel, 9000);
-}
-</script>
 
