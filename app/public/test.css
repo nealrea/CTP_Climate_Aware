@@ -39,6 +39,10 @@
 	clear: both;
 }
 
+#refs {
+	text-align: left;
+}
+
 .leaflet-social-control a {
   font-size: 200%;
   color: darkslateblue;
