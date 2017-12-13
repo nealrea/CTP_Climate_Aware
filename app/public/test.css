@@ -1,7 +1,7 @@
 #maps {
 	width: 1300px;
 	margin-left: 0px;
-	flloat: left;
+	float: left;
 }
 
 #mapid1, #mapid2 {
@@ -16,12 +16,23 @@
 #noRegText, #yesRegText {
 	margin: 0;
 	padding: 0;
+	width: 520px;
+	text-align: center;
 }
 
 #mapid1-title, #mapid2-title {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
+}
+
+#mapid2-title {
+	margin-left: 5px;
+}
+
+#map-type {
+	margin-bottom: 10px;
+	text-align: center;
 }
 
 #clear {

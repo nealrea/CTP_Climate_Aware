@@ -200,14 +200,14 @@ function climateEffect(){
   var year = 2006 + Number(slider.value);
   if(year < 2100){
     document.getElementById("noRegText").innerHTML = "NYC Sea-level: Normal";
-    document.getElementById("noRegText").style.background = "#FFFFFF";
+    document.getElementById("noRegText").style.background = "#46FE01";
     document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Normal";
-    document.getElementById("yesRegText").style.background = "#FFFFFF";
+    document.getElementById("yesRegText").style.background = "#46FE01";
   }else if(year < 2200){
     document.getElementById("noRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
     document.getElementById("noRegText").style.background = "#FDF902";
     document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Normal";
-    document.getElementById("yesRegText").style.background = "#FFFFFF";
+    document.getElementById("yesRegText").style.background = "#46FE01";
   }else if(year < 2290){
     document.getElementById("noRegText").innerHTML = "NYC Sea-level: Everything south of Canal street is an island";
     document.getElementById("noRegText").style.background = "#FEB901";
