@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-heading">
-          <h1>Climate Change: Do Humans Matter?</h1>
+          <h1 id="title">Climate Change: Do Humans Matter?</h1>
           <hr class="small">
         </div>
       </div>
@@ -67,16 +67,22 @@
       <div class="col-lg-6">
         <div id="maps">
             <div id="map-titles">
-                <div id="mapid1-title" class="col-lg-5">
-                    <h4>Unregulated Emissions</h4>
+                <div id="mapid1-title">
+                    <h4 id="map-type">Unregulated Emissions</h4>
+                    <p id="noRegText"></p>
                 </div>
                 <div id="mapid2-title">
-                    <h4>Regulated Emissions</h4>
+                    <h4 id="map-type">Regulated Emissions</h4>
+                    <p id="yesRegText"></p>
                 </div>
             </div>
-            <div id="mapid1"></div>
-            <div id="mapid2"></div>
-            <div id="clear"></div>
+            <div id="map1">
+              <div id="mapid1"></div>
+            </div>
+            <div id="map2">
+              <div id="mapid2"></div>
+              <div id="clear"></div>
+            </div>
         </div>
       </div>
     </div>
