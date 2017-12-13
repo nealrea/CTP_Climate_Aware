@@ -196,6 +196,31 @@ function fetchData() {
     // displayVal(data, mymapYesReg, diagnostic);
 }
 
+function climateEffect(){
+  var year = 2006 + Number(slider.value);
+  if(year < 2100){
+    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Normal";
+    document.getElementById("noRegText").style.background = "#FFFFFF";
+    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Normal";
+    document.getElementById("yesRegText").style.background = "#FFFFFF";
+  }else if(year < 2200){
+    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
+    document.getElementById("noRegText").style.background = "#FDF902";
+    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Normal";
+    document.getElementById("yesRegText").style.background = "#FFFFFF";
+  }else if(year < 2290){
+    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Everything south of Canal street is an island";
+    document.getElementById("noRegText").style.background = "#FEB901";
+    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
+    document.getElementById("yesRegText").style.background = "#FDF902";
+  }else{
+    document.getElementById("noRegText").innerHTML = "NYC Sea-level: Sea water surrounds pools at 9/11 memorial";
+    document.getElementById("noRegText").style.background = "#FE0101";
+    document.getElementById("yesRegText").innerHTML = "NYC Sea-level: Westside Highway underwater";
+    document.getElementById("yesRegText").style.background = "#FDF902";
+  }
+};
+
 // Add dynamic URL hash for Leaflet map
 var allMapLayers = {
    'base_layer_name': baseLayerNoReg,
@@ -208,11 +233,16 @@ var hash = new L.Hash(mymapNoReg, allMapLayers);
 L.control.social({default_text: "Check out my Climate Aware map!"}).addTo(mymapNoReg);
 
 fetchData();
-slider.onchange = fetchData;
+climateEffect();
+slider.onchange = function(){
+  fetchData();
+  climateEffect();
+};
 
 document.querySelector('#params').onchange = function(event) {
   diagnostic = event.target.getAttribute('id');
   fetchData();
+  climateEffect();
 };
 
 var timeLapseBtn = document.querySelector('#timelapse');
@@ -230,6 +260,7 @@ const initSetTimeOut = (callback) => {
 const setValue = (year) => {
   slider.value = year;
   fetchData();
+  climateEffect();
   if (!stopTimer) initTimeLapse();
 };
 
@@ -257,6 +288,7 @@ stopTimerBtn.onclick =function(e) {
     e.target.value = "Stop";
     timeLapseBtn.value = "Timelapse";
     fetchData();
+    climateEffect();
     return;
   }
   timeLapseBtn.value = "Resume";

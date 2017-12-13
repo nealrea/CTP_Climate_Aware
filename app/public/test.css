@@ -8,11 +8,20 @@
 	height: 340px;
 	width: 520px;
 	margin-right: 10px;
+	margin-left: 0;
 	float: left;
+	padding: 0;
+}
+
+#noRegText, #yesRegText {
+	margin: 0;
+	padding: 0;
 }
 
 #mapid1-title, #mapid2-title {
 	display: inline-block;
+	margin: 0;
+	padding: 0;
 }
 
 #clear {
