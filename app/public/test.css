@@ -30,7 +30,7 @@
 	margin-left: 5px;
 }
 
-#map-type {
+#map-type, #title {
 	margin-bottom: 10px;
 	text-align: center;
 }
