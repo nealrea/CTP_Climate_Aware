@@ -1,9 +1,0 @@
-{
-  "development": {
-    "username": "ctp_user",
-    "password": "ctp_user",
-    "database": "climate_db",
-    "host": "localhost",
-    "dialect": "postgres"
-  }
-}
