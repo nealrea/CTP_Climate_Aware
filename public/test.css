@@ -1,0 +1,74 @@
+#maps {
+	width: 1300px;
+	margin-left: 0px;
+	float: left;
+}
+
+#mapid1, #mapid2 {
+	height: 340px;
+	width: 520px;
+	margin-right: 10px;
+	margin-left: 0;
+	float: left;
+	padding: 0;
+}
+
+#noRegText, #yesRegText {
+	margin: 0;
+	padding: 0;
+	width: 520px;
+	text-align: center;
+}
+
+#mapid1-title, #mapid2-title {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+#mapid2-title {
+	margin-left: 5px;
+}
+
+#map-type, #title {
+	margin-bottom: 0;
+	text-align: center;
+}
+
+#clear {
+	clear: both;
+}
+
+#refs {
+	text-align: left;
+}
+
+#years {
+	width: 130px;
+	margin-top: 10px;
+	margin-left: 460px;
+	margin-bottom: 0;
+}
+
+#year {
+	display: inline;
+	float: left;
+	margin-bottom: 10px;
+}
+
+#demo {
+	display: inline;
+	float: right;
+	margin-bottom: 10px;
+}
+
+#seaLevelNoReg, #seaLevelYesReg {
+	margin: 0;
+	text-align: center;
+}
+
+.leaflet-social-control a {
+  font-size: 200%;
+  color: darkslateblue;
+  text-decoration: none;
+}
