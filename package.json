@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "CTP CAPSTONE",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon -L app.js",
     "test": "mocha --recursive tests/"
   },
   "author": "CTP",
