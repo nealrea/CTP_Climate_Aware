@@ -32,7 +32,7 @@ app.use(viewHelpers.register());
 
 app.use(require('./controllers/'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 models.sequelize.sync().then(() => {
   app.listen(PORT, () => {
