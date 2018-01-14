@@ -5,7 +5,7 @@
     "database": "climate_db",
     "host": "localhost",
     "dialect": "postgres"
-  }
+  },
   "production": {
   	"use_env_variable": "DATABASE_URL",
   	"dialect": "postgresql"
