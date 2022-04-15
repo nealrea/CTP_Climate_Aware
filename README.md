@@ -4,9 +4,7 @@
 
 ## __Team Members__
 **Moustafa Abdou**  
-The City College of New York  
-drsh2k19@gmail.com  
-https://github.com/drsh2k  
+The City College of New York
 
 **Olga Kent**  
 CUNY Hunter College  
